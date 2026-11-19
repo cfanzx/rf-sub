@@ -1,0 +1,40 @@
+mixed-port: 7890
+allow-lan: false
+mode: rule
+log-level: info
+ipv6: false
+
+proxies:
+  - name: RF-8443-huaweipad
+    type: vless
+    server: 104.251.234.204
+    port: 8443
+    uuid: 5be758af-cdb5-4892-b4c3-639cb28491df
+    network: tcp
+    udp: false
+    tls: true
+    flow: xtls-rprx-vision
+    servername: www.yahoo.co.jp
+    client-fingerprint: chrome
+    reality-opts:
+      public-key: LJj6ynQyQzGyVGagftKrb86odtVhtH4t_xsLu4XkMlo
+      short-id: cad7f285
+
+proxy-groups:
+  - name: PROXY
+    type: select
+    proxies:
+      - RF-8443-huaweipad
+      - DIRECT
+
+rules:
+  - DOMAIN-SUFFIX,cn,DIRECT
+  - DOMAIN-SUFFIX,qq.com,DIRECT
+  - DOMAIN-SUFFIX,baidu.com,DIRECT
+  - DOMAIN-SUFFIX,taobao.com,DIRECT
+  - DOMAIN-SUFFIX,jd.com,DIRECT
+  - DOMAIN-SUFFIX,bilibili.com,DIRECT
+  - DOMAIN-SUFFIX,aliyun.com,DIRECT
+  - DOMAIN-SUFFIX,123pan.com,DIRECT
+  - DOMAIN-SUFFIX,quark.cn,DIRECT
+  - MATCH,PROXY
